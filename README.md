@@ -1,6 +1,6 @@
-# Omegle-App
+# ChatWithMe
 
-Lets strangers or people nearby to chat with each other.
+A mobile and webapp to let strangers or people nearby to chat with each other.
 
 ---
 
