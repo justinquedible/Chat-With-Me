@@ -1,25 +1,21 @@
 import React from "react";
-import {
-  Button,
-  StyleSheet,
-  View,
-  Text,
-  FlatList,
-  TextInput,
-} from "react-native";
+import { Button, StyleSheet, Text, FlatList, TextInput } from "react-native";
 import io, { Socket } from "socket.io-client";
 import uuid from "react-native-uuid";
 import { Props } from "../Navigation";
 import { DefaultEventsMap } from "@socket.io/component-emitter";
+import Screen from "../components/Screen";
 
 export default function AllChat(props: Props) {
   const [message, setMessage] = React.useState("");
-  const [messages, setMessages] = React.useState<string[]>([]);
+  const [messages, setMessages] = React.useState<string[]>(["Connected"]);
   const [socket, setSocket] =
     React.useState<Socket<DefaultEventsMap, DefaultEventsMap>>();
 
+  const flatList = React.useRef<FlatList>(null);
+
   React.useEffect(() => {
-    const sio = io("https://107.184.73.48:8080");
+    const sio = io("https://server-m7qcpsjy5a-uw.a.run.app");
     setSocket(sio);
 
     sio.on("connect", () => {
@@ -27,7 +23,7 @@ export default function AllChat(props: Props) {
     });
 
     sio.on("message", (msg: string) => {
-      setMessages((messages) => [...messages, msg]);
+      setMessages((messages) => [msg, ...messages]);
     });
 
     sio.on("disconnect", () => {
@@ -50,8 +46,12 @@ export default function AllChat(props: Props) {
   };
 
   return (
-    <View style={styles.container}>
+    <Screen>
       <FlatList
+        style={styles.messageList}
+        ref={flatList}
+        inverted={true}
+        scrollEnabled={false}
         data={messages}
         renderItem={renderMessage}
         keyExtractor={(item: string, index: number) => uuid.v4() as string}
@@ -59,6 +59,8 @@ export default function AllChat(props: Props) {
 
       <TextInput
         style={styles.textInput}
+        autoFocus={true}
+        blurOnSubmit={false}
         value={message}
         onSubmitEditing={submitMessage}
         onChangeText={(msg) => {
@@ -67,17 +69,16 @@ export default function AllChat(props: Props) {
       />
 
       <Button title="Go Back" onPress={handleGoBack} />
-    </View>
+    </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#000",
-  },
   message: {
     color: "#fff",
+  },
+  messageList: {
+    paddingTop: 10,
   },
   textInput: {
     backgroundColor: "#fff",

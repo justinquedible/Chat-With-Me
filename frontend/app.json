@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Omegle",
-    "slug": "Omegle-App",
+    "name": "ChatWithMe",
+    "slug": "ChatWithMe",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/logo.png",
@@ -13,9 +13,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.poorUCIstudents.omegle",

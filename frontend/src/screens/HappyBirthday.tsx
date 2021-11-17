@@ -31,13 +31,13 @@ export default function Jason(props: ScreenProps) {
   return (
     <View style={styles.container}>
       <Button title="Go Back" onPress={handleGoBack} />
-      <Video
+      {/* <Video
         ref={video}
         style={styles.video}
         source={require(`../../assets/${props.route.params.name}.mp4`)}
         resizeMode="contain"
         isLooping={true}
-      />
+      /> */}
     </View>
   );
 }
