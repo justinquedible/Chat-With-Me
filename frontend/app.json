@@ -16,7 +16,7 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.poorUCIstudents.omegle",
+      "bundleIdentifier": "com.poorUCIstudents.chatwithme",
       "buildNumber": "1.0.0"
     },
     "android": {
@@ -24,7 +24,7 @@
         "foregroundImage": "./assets/logo.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.poorUCIstudents.omegle",
+      "package": "com.poorUCIstudents.chatwithme",
       "versionCode": 1
     },
     "web": {
