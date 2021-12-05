@@ -1,6 +1,7 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
-import { Button, StyleSheet, View } from "react-native";
+import { View, StyleSheet } from "react-native";
+import { Button, ThemeProvider } from "react-native-elements";
 import { Props } from "../Navigation";
 import Screen from "../components/Screen";
 
@@ -18,17 +19,37 @@ export default function Home(props: Props) {
   };
 
   return (
-    <Screen>
-      <Button title="Go to All-Chat Room" onPress={handleRandomChatPress} />
-      {/* <Button
-        title="Happy Birthday Jason"
-        onPress={() => handleSecretPress("Jason")}
-      />
-      <Button
-        title="Happy Birthday Chan"
-        onPress={() => handleSecretPress("Chan")}
-      /> */}
-      <StatusBar style="light" />
-    </Screen>
+    <ThemeProvider theme={theme}>
+      <Screen>
+        <View style={styles.buttonContainer}>
+          <Button title="Go to All-Chat Room" onPress={handleRandomChatPress} />
+          <Button title="Jason" onPress={() => handleSecretPress("jason")} />
+          <Button title="Chan" onPress={() => handleSecretPress("chan")} />
+          <Button
+            title="Jonathan"
+            onPress={() => handleSecretPress("jonathan")}
+          />
+        </View>
+        <StatusBar style="light" />
+      </Screen>
+    </ThemeProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  buttonContainer: {
+    alignItems: "center",
+  },
+});
+
+const theme = {
+  Button: {
+    buttonStyle: {
+      backgroundColor: "#09f",
+    },
+    containerStyle: {
+      margin: 20,
+      width: "80%",
+    },
+  },
+};

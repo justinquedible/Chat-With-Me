@@ -18,7 +18,8 @@ Run `npm run deploy-hosting` in frontend directory.
 
 #### Build for Android and iOS
 
-https://docs.expo.dev/classic/building-standalone-apps/
+Run `expo publish` in frontend directory.
+More info at: https://docs.expo.dev/classic/building-standalone-apps/
 
 #### Backend
 

@@ -1,5 +1,6 @@
 import React from "react";
-import { Button, StyleSheet, Text, FlatList, TextInput } from "react-native";
+import { StyleSheet, Text, FlatList, TextInput } from "react-native";
+import { Button, Input } from "react-native-elements";
 import io, { Socket } from "socket.io-client";
 import uuid from "react-native-uuid";
 import { Props } from "../Navigation";
@@ -19,7 +20,7 @@ export default function AllChat(props: Props) {
     setSocket(sio);
 
     sio.on("connect", () => {
-      console.log("connected");
+      // console.log("connected");
     });
 
     sio.on("message", (msg: string) => {
@@ -27,7 +28,7 @@ export default function AllChat(props: Props) {
     });
 
     sio.on("disconnect", () => {
-      console.log("disconnected");
+      // console.log("disconnected");
     });
   }, []);
 
@@ -47,6 +48,8 @@ export default function AllChat(props: Props) {
 
   return (
     <Screen>
+      <Button title="Go Back" onPress={handleGoBack} />
+
       <FlatList
         style={styles.messageList}
         ref={flatList}
@@ -57,18 +60,17 @@ export default function AllChat(props: Props) {
         keyExtractor={(item: string, index: number) => uuid.v4() as string}
       />
 
-      <TextInput
+      <Input
         style={styles.textInput}
         autoFocus={true}
         blurOnSubmit={false}
+        placeholder=" Type to chat"
         value={message}
         onSubmitEditing={submitMessage}
         onChangeText={(msg) => {
           setMessage(msg);
         }}
       />
-
-      <Button title="Go Back" onPress={handleGoBack} />
     </Screen>
   );
 }
@@ -79,6 +81,7 @@ const styles = StyleSheet.create({
   },
   messageList: {
     paddingTop: 10,
+    marginHorizontal: 10,
   },
   textInput: {
     backgroundColor: "#fff",
