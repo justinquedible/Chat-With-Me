@@ -54,7 +54,6 @@ export default function AllChat(props: Props) {
         style={styles.messageList}
         ref={flatList}
         inverted={true}
-        scrollEnabled={false}
         data={messages}
         renderItem={renderMessage}
         keyExtractor={(item: string, index: number) => uuid.v4() as string}
@@ -77,10 +76,11 @@ export default function AllChat(props: Props) {
 
 const styles = StyleSheet.create({
   message: {
+    fontSize: 16,
     color: "#fff",
   },
   messageList: {
-    paddingTop: 10,
+    paddingTop: 20,
     marginHorizontal: 10,
   },
   textInput: {
