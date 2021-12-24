@@ -8,7 +8,7 @@ import Screen from "../components/Screen";
 export default function Home(props: Props) {
   React.useEffect(() => {}, []);
 
-  const handleRandomChatPress = () => {
+  const handleAllChatPress = () => {
     props.navigation.navigate("AllChat");
   };
 
@@ -22,7 +22,7 @@ export default function Home(props: Props) {
     <ThemeProvider theme={theme}>
       <Screen>
         <View style={styles.buttonContainer}>
-          <Button title="Go to All-Chat Room" onPress={handleRandomChatPress} />
+          <Button title="Go to All-Chat Room" onPress={handleAllChatPress} />
           <Button title="Jason" onPress={() => handleSecretPress("jason")} />
           <Button title="Chan" onPress={() => handleSecretPress("chan")} />
           <Button
