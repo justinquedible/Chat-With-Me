@@ -13,9 +13,14 @@ const io = new Server(httpServer, {
 io.on("connection", (socket) => {
   console.log("connected", socket.id);
 
-  socket.on("message", (message) => {
-    console.log(socket.id, message);
-    io.send(message);
+  socket.on("join", (roomName) => {
+    console.log(socket.id, "join", roomName);
+    socket.join(roomName);
+  });
+
+  socket.on("message", (roomName, message) => {
+    console.log(socket.id, roomName, message);
+    io.to(roomName).emit("message", message);
   });
 
   socket.on("disconnect", (reason) => {

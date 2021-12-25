@@ -9,7 +9,7 @@ import {
 } from "@react-navigation/native-stack";
 
 import Home from "./screens/Home";
-import AllChat from "./screens/AllChat";
+import ChatRoom from "./screens/ChatRoom";
 import HappyBirthday from "./screens/HappyBirthday";
 import { UpdateEventType } from "expo-updates";
 
@@ -37,7 +37,7 @@ export default function Navigation() {
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="AllChat" component={AllChat} />
+        <Stack.Screen name="ChatRoom" component={ChatRoom} />
         <Stack.Screen name="HappyBirthday" component={HappyBirthday} />
       </Stack.Navigator>
     </NavigationContainer>
