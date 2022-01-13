@@ -42,7 +42,7 @@ export default function ChatRoom(props: ScreenProps) {
 
   const handleGoBack = () => {
     socket?.disconnect();
-    props.navigation.goBack();
+    props.navigation.navigate("Home");
   };
 
   const submitMessage = () => {
@@ -57,7 +57,7 @@ export default function ChatRoom(props: ScreenProps) {
   return (
     <ThemeProvider theme={theme}>
       <Screen>
-        <Button title="Go Back" onPress={handleGoBack} />
+        <Button title="Go Home" onPress={handleGoBack} />
 
         {/* TODO: Fix this */}
         <Text>{roomName}</Text>

@@ -17,6 +17,16 @@ export type Props = NativeStackScreenProps<ParamListBase>;
 
 const Stack = createNativeStackNavigator();
 
+const linking = {
+  prefixes: ["https://expo.io", "expo://"],
+  config: {
+    screens: {
+      Home: "home",
+      ChatRoom: "chatroom",
+    },
+  },
+};
+
 export default function Navigation() {
   useEffect(() => {
     if (Device.brand !== null) {
@@ -31,7 +41,7 @@ export default function Navigation() {
   }, []);
 
   return (
-    <NavigationContainer>
+    <NavigationContainer linking={linking}>
       <Stack.Navigator
         initialRouteName="Home"
         screenOptions={{ headerShown: false }}
