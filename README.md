@@ -23,5 +23,5 @@ More info at: https://docs.expo.dev/classic/building-standalone-apps/
 
 #### Backend
 
-1. Run `gcloud builds submit --tag gcr.io/omegle-app-backend/server` in backend directory.
-2. Run `gcloud run deploy --image gcr.io/omegle-app-backend/server` in backend directory.
+1. Run `gcloud builds submit --tag gcr.io/omegle-app-28aed/server` in backend directory.
+2. Run `gcloud run deploy --image gcr.io/omegle-app-28aed/server` in backend directory.
