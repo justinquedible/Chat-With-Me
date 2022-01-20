@@ -23,7 +23,7 @@ export default function ChatRoom(props: ScreenProps) {
   const flatList = React.useRef<FlatList>(null);
 
   React.useEffect(() => {
-    const sio = io("https://server-m7qcpsjy5a-uw.a.run.app");
+    const sio = io("https://server-yzble43rrq-uw.a.run.app");
     setSocket(sio);
 
     sio.on("connect", () => {
