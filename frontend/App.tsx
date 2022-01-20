@@ -3,6 +3,8 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import Navigation from "./src/Navigation";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { ThemeProvider } from "react-native-elements";
+import { theme } from "./src/styling/theme";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCtDZGfqTvTAJ_qb-rIqJCuR5sptJrGNuw",
@@ -19,8 +21,10 @@ const analytics = getAnalytics(app);
 
 export default function App() {
   return (
-    <SafeAreaProvider>
-      <Navigation />
-    </SafeAreaProvider>
+    <ThemeProvider theme={theme}>
+      <SafeAreaProvider>
+        <Navigation />
+      </SafeAreaProvider>
+    </ThemeProvider>
   );
 }

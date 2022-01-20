@@ -16,6 +16,12 @@ export const theme = {
     },
   },
   Text: {
-    textStyle: { fontSize: 16, color: "#fff" },
+    h4Style: {
+      alignSelf: "center",
+    },
+    style: {
+      fontSize: 16,
+      color: "#fff",
+    },
   },
 };

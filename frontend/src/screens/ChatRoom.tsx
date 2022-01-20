@@ -1,13 +1,12 @@
 import React from "react";
-import { StyleSheet, FlatList } from "react-native";
-import { Button, Input, Text, ThemeProvider } from "react-native-elements";
+import { StyleSheet, FlatList, View } from "react-native";
+import { Button, Input, Text } from "react-native-elements";
 import io, { Socket } from "socket.io-client";
 import uuid from "react-native-uuid";
 import { Props } from "../Navigation";
 import { RouteProp } from "@react-navigation/core";
 import { DefaultEventsMap } from "@socket.io/component-emitter";
 import Screen from "../components/Screen";
-import { theme } from "../styling/theme";
 
 interface ScreenProps extends Props {
   route: RouteProp<{ [roomName: string]: { roomName: string } }>;
@@ -16,14 +15,17 @@ interface ScreenProps extends Props {
 export default function ChatRoom(props: ScreenProps) {
   const roomName = props.route.params?.roomName;
   const [message, setMessage] = React.useState("");
-  const [messages, setMessages] = React.useState<string[]>([]);
+  const [timeStamps, setTimeStamps] = React.useState<string[]>(["234", "2342"]);
+  const [messages, setMessages] = React.useState<string[]>(["hi", "hello"]);
+
   const [socket, setSocket] =
     React.useState<Socket<DefaultEventsMap, DefaultEventsMap>>();
 
   const flatList = React.useRef<FlatList>(null);
 
   React.useEffect(() => {
-    const sio = io("https://server-yzble43rrq-uw.a.run.app");
+    // const sio = io("https://server-yzble43rrq-uw.a.run.app");
+    const sio = io("http://localhost:8080");
     setSocket(sio);
 
     sio.on("connect", () => {
@@ -32,6 +34,8 @@ export default function ChatRoom(props: ScreenProps) {
     });
 
     sio.on("message", (msg: string) => {
+      const time = new Date().toLocaleTimeString();
+      setTimeStamps((timeStamps) => [time, ...timeStamps]);
       setMessages((messages) => [msg, ...messages]);
     });
 
@@ -51,17 +55,28 @@ export default function ChatRoom(props: ScreenProps) {
   };
 
   const renderMessage = ({ item }: { item: string }) => {
-    return <Text style={theme.Text.textStyle}>{item}</Text>;
+    return <Text>{item}</Text>;
+  };
+
+  const renderTimeStamp = ({ item }: { item: string }) => {
+    return <Text style={styles.timeStamp}>{item}</Text>;
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Screen>
-        <Button title="Go Home" onPress={handleGoBack} />
+    <Screen>
+      <Button title="Go Home" onPress={handleGoBack} />
 
-        {/* TODO: Fix this */}
-        <Text>{roomName}</Text>
+      <Text h4>Room Name: {roomName}</Text>
 
+      <View style={styles.container}>
+        <FlatList
+          style={styles.timeStampList}
+          ref={flatList}
+          inverted={true}
+          data={timeStamps}
+          renderItem={renderTimeStamp}
+          keyExtractor={(item: string, index: number) => uuid.v4() as string}
+        />
         <FlatList
           style={styles.messageList}
           ref={flatList}
@@ -70,25 +85,35 @@ export default function ChatRoom(props: ScreenProps) {
           renderItem={renderMessage}
           keyExtractor={(item: string, index: number) => uuid.v4() as string}
         />
+      </View>
 
-        <Input
-          autoFocus={true}
-          blurOnSubmit={false}
-          placeholder="Type to chat"
-          value={message}
-          onSubmitEditing={submitMessage}
-          onChangeText={(msg) => {
-            setMessage(msg);
-          }}
-        />
-      </Screen>
-    </ThemeProvider>
+      <Input
+        autoFocus={true}
+        blurOnSubmit={false}
+        placeholder="Type to chat"
+        value={message}
+        onSubmitEditing={submitMessage}
+        onChangeText={(msg) => {
+          setMessage(msg);
+        }}
+      />
+    </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  messageList: {
-    paddingTop: 20,
+  container: {
+    flex: 1,
+    flexDirection: "row",
+    marginVertical: 20,
     marginHorizontal: 10,
+  },
+  messageList: {},
+  timeStampList: {
+    minWidth: 100,
+    maxWidth: 100,
+  },
+  timeStamp: {
+    color: "#ddd",
   },
 });

@@ -31,4 +31,4 @@ io.on("connection", (socket) => {
 const port = process.env.PORT || 8080;
 httpServer.listen(port);
 
-console.log("listening on port 8080");
+console.log("listening on port", port);
