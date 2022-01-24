@@ -1,4 +1,4 @@
-# ChatWithMe
+# Chat-With-Me
 
 A mobile and webapp to let strangers or people nearby to chat with each other.
 
